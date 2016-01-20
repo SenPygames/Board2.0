@@ -1,0 +1,33 @@
+import os, pygame
+
+pygame.init()
+display_width = 1000
+display_height = 1400
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+boardgame = pygame.image.load ("Boardgame.png")
+gameDisplay = pygame.display.set_mode((display_height,display_width))
+pygame.display.set_caption('Surivor')
+
+screen = pygame.display.set_mode(boardgame.get_rect().size,0,32)
+
+board = boardgame.convert() # now you can convert
+
+def CornerTile(x,y):
+    gameDisplay.blit(boardgame,(x,y))
+
+x = (0)
+y = (0)
+gameExit = False
+
+while not gameExit:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            gameExit = True
+
+    gameDisplay.fill(white)
+    CornerTile(x,y)
+    pygame.display.flip()
+pygame.quit()
+quit()
