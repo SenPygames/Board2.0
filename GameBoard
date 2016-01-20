@@ -1,0 +1,56 @@
+import os, pygame
+
+class Empty:
+    def __init__(self):
+        self.isEmpty = True
+Empty = Empty()
+
+class Node:
+    def __init__(self,Name,Position_X, Position_Y,Tail):
+        self.isEmpty = False
+        self.Name = Name
+        self.Position_X = Position_X
+        self.Position_Y = Position_Y
+        self.tail = Tail
+pygame.init()
+display_width = 1000
+display_height = 1400
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+boardgame = pygame.image.load ("Board.png")
+gameDisplay = pygame.display.set_mode((display_height,display_width))
+pygame.display.set_caption('Surivor')
+Player1 = pygame.image.load("BoksHandschoen.png")
+screen = pygame.display.set_mode(boardgame.get_rect().size,0,32)
+
+board = boardgame.convert() # now you can convert
+PlayerList1= Node("Pos1",0,0,Node("Pos2",100,0,Node("Pos3",160,0,Empty)))
+def CornerTile(x,y):
+    x = (0)
+    y = (0)
+    gameDisplay.blit(boardgame,(x,y))
+
+def Player1Glove(List):
+    x = PlayerList1.Position_X
+    y = PlayerList1.Position_Y
+    gameDisplay.blit(Player1,(x,y))
+
+gameExit = False
+
+while not gameExit:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            gameExit = True
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                gameExit = True
+            if event.key == pygame.K_2:
+                PlayerList1 = PlayerList1.tail
+    gameDisplay.fill(white)
+    CornerTile(0,0)
+    Player1Glove(PlayerList1)
+    pygame.display.flip()
+
+pygame.quit()
+quit()
